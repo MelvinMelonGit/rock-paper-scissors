@@ -22,63 +22,21 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
     //compare player with computer choice
-    let result;
     let message;
     const playerSelectionLowerCase = playerSelection.toLowerCase();
 
-    switch (computerSelection) {
-        case "rock":
-            switch(playerSelection) {
-                case "rock":
-                    result = "draw";
-                    break;
-                case "paper":
-                    result = "loss";
-                    break;
-                case "scissors":
-                    result = "win";
-                    break;
-            }
-            break;
-        case "paper":
-            switch(playerSelection) {
-                case "rock":
-                    result = "win";
-                    break;
-                case "paper":
-                    result = "draw";
-                    break;
-                case "scissors":
-                    result = "loss";
-                    break;
-            }
-            break;
-        case "scissors":
-            switch(playerSelection) {
-                case "rock":
-                    result = "loss";
-                    break;
-                case "paper":
-                    result = "win";
-                    break;
-                case "scissors":
-                    result = "draw";
-                    break;
-            }
-            break;
-    }
+    if (playerSelectionLowerCase === computerSelection) {
+        message = `You Draw! ${playerSelectionLowerCase} draws ${computerSelection}`;
+    } 
     
-    //output win or lose message
-    switch (result) {
-        case "win":
-            message = `You Win! ${playerSelectionLowerCase} beats ${computerSelection}`;
-            break;
-        case "draw":
-            message = `You Draw! ${playerSelectionLowerCase} draws ${computerSelection}`;;
-            break;
-        case "loss":
-            message = `You Lose! ${playerSelectionLowerCase} loses ${computerSelection}`;;
-            break;
+    else if ((playerSelectionLowerCase === "rock" && computerSelection === "scissors") ||
+    (playerSelectionLowerCase === "paper" && computerSelection === "rock") ||
+    (playerSelectionLowerCase === "scissors" && computerSelection === "paper")) {
+        message = `You Win! ${playerSelectionLowerCase} beats ${computerSelection}`;
+    }
+
+    else {
+        message = `You Lose! ${playerSelectionLowerCase} loses ${computerSelection}`;
     }
     return message;
 }
