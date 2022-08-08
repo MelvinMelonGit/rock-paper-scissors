@@ -42,11 +42,12 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function game() {
-    for (let i = 0; i < 5; i++) {
-        const playerSelection = prompt("Pick Rock, Paper or Scissors!");
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.addEventListener('click', function() {
+        const playerSelection = this.innerText;
         const computerSelection = getComputerChoice();
         console.log(playRound(playerSelection, computerSelection));
-    }
+    }));
 }
 
 //play game!
