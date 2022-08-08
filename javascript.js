@@ -41,13 +41,15 @@ function playRound(playerSelection, computerSelection) {
     return message;
 }
 
+function playSelection() {
+    const playerSelection = this.innerText;
+    const computerSelection = getComputerChoice();
+    console.log(playRound(playerSelection, computerSelection));
+}
+
 function game() {
     const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => button.addEventListener('click', function() {
-        const playerSelection = this.innerText;
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-    }));
+    buttons.forEach(button => button.addEventListener('click', playSelection));
 }
 
 //play game!
