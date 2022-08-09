@@ -1,3 +1,9 @@
+//instatiate scores
+const playerPoints = document.querySelector('#playerPoints');
+const computerPoints = document.querySelector('#computerPoints');
+let playerScore = 0; 
+let computerScore = 0; 
+
 function getComputerChoice() {
     //return either rock, paper or scissors at random
 
@@ -33,21 +39,47 @@ function playRound(playerSelection, computerSelection) {
     (playerSelectionLowerCase === "paper" && computerSelection === "rock") ||
     (playerSelectionLowerCase === "scissors" && computerSelection === "paper")) {
         message = `You Win! ${playerSelectionLowerCase} beats ${computerSelection}`;
+        playerScore++;
     }
 
     else {
         message = `You Lose! ${playerSelectionLowerCase} loses ${computerSelection}`;
+        computerScore++;
     }
+
+    playerPoints.innerText = playerScore;
+    computerPoints.innerText = computerScore;
+
     return message;
 }
 
 function playSelection() {
     const playerSelection = this.innerText;
     const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
+    const results = document.querySelector('#results');
+
+    if (playerScore === 0 && computerScore === 0) results.innerText = "";
+
+    const addResult = document.createElement('div');
+    addResult.innerText = playRound(playerSelection, computerSelection);
+    results.appendChild(addResult);
+    if(playerScore === 5) {
+       getWinner("Player");
+    }
+    if(computerScore === 5) {
+        getWinner("Computer");
+    }
 }
 
-function game() {
+function getWinner(winner) {
+    results.innerText = `${winner} wins!`;
+    playerScore = 0;
+    computerScore = 0;
+    playerPoints.innerText = playerScore;
+    computerPoints.innerText = computerScore;
+}
+
+function game() { 
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => button.addEventListener('click', playSelection));
 }
